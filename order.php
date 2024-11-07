@@ -56,7 +56,7 @@ class order
         if ($this->status === "deliveryAddressSet" && !empty($this->products)) {
             $this->status = "paid";
         } else {
-            throw new exception("La commande ne peut pas être payé car vous n'avez pas mis d'adresse de livraison.");
+            throw new Exception("La commande ne peut pas être payé car vous n'avez pas mis d'adresse de livraison.");
         }
     }
 
