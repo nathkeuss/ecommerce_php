@@ -64,7 +64,7 @@ class VendorMachine
         if ($this->isOn) { //la machine doit être allumé
             foreach ($this->snacks as $index => $snack) { //boucle sur la liste des snacks
                 if ($snack["name"] === $snackName && $snack["quantity"] >= 1) { // vérifie si le nom du snack correspond et si la quantité est supérieur à 0
-                    $this->snacks[$index]["quantity"] = $this->snacks[$index]["quantity"] - 1; // décrément la quantité du snack
+                    $this->removeSnackQuantity($index); // décrément la quantité du snack
                     $this->cashAmount = $this->cashAmount += $snack["price"]; //ajoute le prix du snack au montant de cashAmount
                 }
             }
@@ -75,8 +75,9 @@ class VendorMachine
     public function shootWithFoot()
     {
         if ($this->isOn === true) { //si la machine est allumée
-            $randomCash = rand(1, $this->cashAmount); // prend un nombre aléatoire du total de cashAmount
+            $randomCash = rand(0, $this->cashAmount); // prend un nombre aléatoire du total de cashAmount
             $this->cashAmount -= $randomCash; // le décrément du total cashAmount
+
             echo '<pre style="font-size: 18px; color:green;">';
             echo "{$randomCash}€ sont tombés";
             echo '</pre>';
@@ -85,13 +86,17 @@ class VendorMachine
             $snack = $this->snacks[$snackIndex];//récupère le snack aléatoire
 
             if ($snack['quantity'] >= 1) { // si la quantité est supérieur ou égal à 1
-                $this->snacks[$snackIndex]["quantity"] - 1; //ça retire une quantité du snack en question
+                $this->removeSnackQuantity($snackIndex); //ça retire une quantité du snack en question
 
                 echo '<pre style="font-size: 18px; color:yellow;">';
                 echo "{$snack['name']} est tombé";
                 echo '</pre>';
             }
         }
+    }
+
+    private function removeSnackQuantity($index) {
+        $this->snacks[$index]["quantity"]-= 1;
     }
 
 
