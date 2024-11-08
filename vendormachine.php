@@ -6,11 +6,11 @@ require_once('./partials/_header.html');
 class VendorMachine
 {
 
-    public $snacks;
+    private $snacks;
 
-    public $cashAmount;
+    private $cashAmount;
 
-    public $isOn;
+    private $isOn;
 
     public function __construct()
     {
@@ -44,20 +44,18 @@ class VendorMachine
 
     public function turnOn() //si turnOn est false il passe à true
     {
-        if ($this->isOn == false) {
             $this->isOn = true;
         }
-    }
 
-    function turnOff()//après 18h la machine s'éteint
+
+    public function turnOff()//après 18h la machine s'éteint
     {
-        $now = new DateTime();
-        $limitTime = new DateTime('18:00');
-
-        if ($now >= $limitTime) {
-            $this->isOn = false;
+        $currenDate = new DateTime();
+        $currentHour = $currenDate->format('H');
+        if ($currentHour >= 18) {
+        $this->isOn = false;
         } else {
-            throw new Exception("Vous ne pouvez pas éteindre la machine car il n'est pas encore dix-huit heures.");
+            throw new exception("Tu ne peux pas éteindre la machine car il n'est pas encore 18h");
         }
     }
 

@@ -5,12 +5,12 @@ require_once "./partials/_header.html";
 class order
 {
 
-    public $id;
-    public $customerName;
-    public $deliveryAddress;
-    public $status = "cart"; //je dis que status = cart de base
-    public $totalPrice = 0; //que le prix total de base est 0
-    public $products = []; //et que les produits seront dans un tableau
+    private $id;
+    private $customerName;
+    private $deliveryAddress;
+    private $status = "cart"; //je dis que status = cart de base
+    private $totalPrice = 0; //que le prix total de base est 0
+    private $products = []; //et que les produits seront dans un tableau
 
 
 //le construteur est une méthode "magique" car elle est appelée automatiquement
